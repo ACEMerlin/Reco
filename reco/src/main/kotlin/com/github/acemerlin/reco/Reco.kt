@@ -12,6 +12,10 @@ fun <T> WithJob.async(job: Job = this.job, start: Boolean = true, block: suspend
     return kotlinx.coroutines.experimental.async(CommonPool + job, start, block)
 }
 
+fun <T> async(job: Job = Job(), start: Boolean = true, block: suspend CoroutineScope.() -> T): Deferred<T> {
+    return kotlinx.coroutines.experimental.async(CommonPool + job, start, block)
+}
+
 fun WithJob.launch(job: Job = this.job, block: suspend CoroutineScope.() -> Unit): Job =
         kotlinx.coroutines.experimental.launch(UI + job, true, block)
 
